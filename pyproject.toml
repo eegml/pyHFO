@@ -8,7 +8,7 @@ version = "1.0.0"
 description = "A PyQt5 desktop application for deep learning-based High-Frequency Oscillation (HFO) analysis in EEG/iEEG data"
 readme = "README.md"
 license = "BSD-3-Clause"
-requires-python = "==3.9.*"
+requires-python = ">=3.9,<=3.11"
 authors = [
     { name = "Yipeng Zhang" },
 ]
