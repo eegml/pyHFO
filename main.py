@@ -1,28 +1,6 @@
-import os
-import re
-import sys
-from pyhfo2app.ui.main_window import MainWindow
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import *
-import multiprocessing as mp
-import torch
-import warnings
-warnings.filterwarnings("ignore")
-
-# Enable DPI scaling
-QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
-QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
-
-
-def closeAllWindows():
-    QApplication.instance().closeAllWindows()
-
+"""Development launcher — delegates to the installed entry point."""
+# also used for py2app which requires a python script to build
+from pyhfo2app.app import main
 
 if __name__ == '__main__':
-    mp.freeze_support()
-    app = QApplication(sys.argv)
-    mainWindow = MainWindow()
-    mainWindow.show()
-    app.aboutToQuit.connect(closeAllWindows)
-    sys.exit(app.exec_())
-    
+    main()
