@@ -11,7 +11,8 @@ PyHFO is a PyQt5 desktop application for deep learning-based High-Frequency Osci
 ```bash
 # Setup (Python 3.9)
 conda create -n pyhfo python=3.9
-pip install -r requirements.txt
+pip install -e .          # recommended (uses pyproject.toml)
+# OR: pip install -r requirements.txt
 
 # Run
 python main.py
@@ -68,4 +69,4 @@ There are no automated tests, linting, or CI configured.
 
 ## macOS Packaging
 
-`setup.py` uses py2applet to build a standalone .app bundle. `macos_package.py` is a secondary packaging script.
+`setup_macos.py` uses py2applet to build a standalone .app bundle. `macos_package.py` is a secondary packaging script.

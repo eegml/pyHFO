@@ -7,3 +7,4 @@ states
 *.edf
 *.xlsx
 .vscode
+*.egg-info/

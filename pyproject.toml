@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68.0", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyhfo2app"
+version = "1.0.0"
+description = "A PyQt5 desktop application for deep learning-based High-Frequency Oscillation (HFO) analysis in EEG/iEEG data"
+readme = "README.md"
+license = "BSD-3-Clause"
+requires-python = "==3.9.*"
+authors = [
+    { name = "Yipeng Zhang" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+dependencies = [
+    "HFODetector",
+    "matplotlib",
+    "mne",
+    "numpy==1.26.4",
+    "p_tqdm",
+    "pandas",
+    "openpyxl",
+    "PyQt5==5.15.9",
+    "PyQt5_sip==12.12.1",
+    "pyqtgraph==0.13.3",
+    "scipy",
+    "scikit-image",
+    "torch",
+    "torchvision",
+    "tqdm",
+    "transformers[torch]",
+    "yasa",
+]
+
+[project.urls]
+Homepage = "https://github.com/NeurologyDepartment/pyHFO"
+
+[project.gui-scripts]
+pyhfo = "pyhfo2app.app:main"
+
+[tool.setuptools.packages.find]
+include = ["pyhfo2app*"]
+
+[tool.setuptools.package-data]
+"pyhfo2app.ui" = ["*.ui"]
+"pyhfo2app.ui.images" = ["*.png", "*.icns"]
