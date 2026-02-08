@@ -1,4 +1,4 @@
-from src.utils.utils_gui import *
+from pyhfo2app.utils.utils_gui import *
 
 
 class MainWindowController:

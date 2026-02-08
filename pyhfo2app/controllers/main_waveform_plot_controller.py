@@ -1,5 +1,5 @@
-from src.models.main_waveform_plot_model import MainWaveformPlotModel
-from src.views.main_waveform_plot_view import MainWaveformPlotView
+from pyhfo2app.models.main_waveform_plot_model import MainWaveformPlotModel
+from pyhfo2app.views.main_waveform_plot_view import MainWaveformPlotView
 import pyqtgraph as pg
 import numpy as np
 

@@ -1,7 +1,7 @@
 import torch
 from tqdm import tqdm
 import numpy as np
-from src.param.param_classifier import ParamModel, ParamPreprocessing
+from pyhfo2app.param.param_classifier import ParamModel, ParamPreprocessing
 
 def load_ckpt(func, model_path):
     model_load = torch.load(model_path, map_location=torch.device('cpu'), weights_only=False)

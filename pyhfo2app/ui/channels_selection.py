@@ -6,11 +6,11 @@ import re
 import os
 import numpy as np
 from pathlib import Path
-from src.hfo_app import HFO_App
-from src.param.param_classifier import ParamClassifier
-from src.param.param_detector import ParamDetector, ParamSTE, ParamMNI
-from src.param.param_filter import ParamFilter
-from src.utils.utils_gui import *
+from pyhfo2app.hfo_app import HFO_App
+from pyhfo2app.param.param_classifier import ParamClassifier
+from pyhfo2app.param.param_detector import ParamDetector, ParamSTE, ParamMNI
+from pyhfo2app.param.param_filter import ParamFilter
+from pyhfo2app.utils.utils_gui import *
 
 import multiprocessing as mp
 import torch

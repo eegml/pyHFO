@@ -1,6 +1,6 @@
 import numpy as np
-from src.models.annotation_model import AnnotationModel
-from src.views.annotation_view import AnnotationView
+from pyhfo2app.models.annotation_model import AnnotationModel
+from pyhfo2app.views.annotation_view import AnnotationView
 
 
 class AnnotationController:

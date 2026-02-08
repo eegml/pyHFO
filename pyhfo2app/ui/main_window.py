@@ -4,11 +4,11 @@ import sys
 import traceback
 from queue import Queue
 from PyQt5.QtWidgets import QMessageBox
-from src.hfo_app import HFO_App
-from src.controllers.main_window_controller import MainWindowController
-from src.models.main_window_model import MainWindowModel
-from src.views.main_window_view import MainWindowView
-from src.utils.utils_gui import *
+from pyhfo2app.hfo_app import HFO_App
+from pyhfo2app.controllers.main_window_controller import MainWindowController
+from pyhfo2app.models.main_window_model import MainWindowModel
+from pyhfo2app.views.main_window_view import MainWindowView
+from pyhfo2app.utils.utils_gui import *
 from PyQt5.QtCore import pyqtSignal
 
 

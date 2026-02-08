@@ -11,7 +11,7 @@ import os
 sys.setrecursionlimit(1500)
 APP = ['main.py']
 DATA_FILES = []
-for folder in ['src', 'ckpt']:
+for folder in ['pyhfo2app', 'ckpt']:
     for root, dirs, files in os.walk(folder):
         for file in files:
             DATA_FILES.append((root, [os.path.join(root, file)]))
@@ -19,7 +19,7 @@ print(DATA_FILES)
 
 OPTIONS = {
     'argv_emulation': False,
-    'iconfile': 'src/ui/images/icon1.icns',
+    'iconfile': 'pyhfo2app/ui/images/icon1.icns',
     'packages': [
         'matplotlib',
         'mne',

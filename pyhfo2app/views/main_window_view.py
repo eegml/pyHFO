@@ -3,7 +3,7 @@ from pathlib import Path
 from PyQt5 import uic
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
-from src.utils.utils_gui import *
+from pyhfo2app.utils.utils_gui import *
 
 ROOT_DIR = Path(__file__).parent.parent.parent
 
@@ -15,12 +15,12 @@ class MainWindowView(QObject):
         # self._init_plot_widget(plot_widget)
 
     def init_general_window(self):
-        self.window.ui = uic.loadUi(os.path.join(ROOT_DIR, 'src/ui/main_window.ui'), self.window)
-        self.window.setWindowIcon(QtGui.QIcon(os.path.join(ROOT_DIR, 'src/ui/images/icon1.png'))) 
+        self.window.ui = uic.loadUi(os.path.join(ROOT_DIR, 'pyhfo2app/ui/main_window.ui'), self.window)
+        self.window.setWindowIcon(QtGui.QIcon(os.path.join(ROOT_DIR, 'pyhfo2app/ui/images/icon1.png'))) 
         self.window.setWindowTitle("pyBrain")
 
         # image_label = QLabel(self.window)
-        pixmap = QPixmap(os.path.join(ROOT_DIR, 'src/ui/images/huggingface_logo.png'))
+        pixmap = QPixmap(os.path.join(ROOT_DIR, 'pyhfo2app/ui/images/huggingface_logo.png'))
         new_width = int(pixmap.width() * 0.5)
         new_height = int(pixmap.height() * 0.5)
         scaled_pixmap = pixmap.scaled(new_width, new_height)

@@ -1,6 +1,6 @@
 import sys
-from src.models.mini_plot_model import MiniPlotModel
-from src.views.mini_plot_view import MiniPlotView
+from pyhfo2app.models.mini_plot_model import MiniPlotModel
+from pyhfo2app.views.mini_plot_view import MiniPlotView
 
 
 class MiniPlotController:

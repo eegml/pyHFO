@@ -1,6 +1,6 @@
 import numpy as np
-from src.hfo_app import HFO_App
-from src.ui.annotation_plot import AnnotationPlot, FFTPlot
+from pyhfo2app.hfo_app import HFO_App
+from pyhfo2app.ui.annotation_plot import AnnotationPlot, FFTPlot
 
 
 class AnnotationModel:

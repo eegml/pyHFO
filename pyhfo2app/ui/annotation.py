@@ -1,12 +1,12 @@
 from PyQt5 import uic
 from pathlib import Path
-from src.utils.utils_gui import *
-# from src.ui.plot_waveform import *
+from pyhfo2app.utils.utils_gui import *
+# from pyhfo2app.ui.plot_waveform import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QSize
-from src.utils.utils_plotting import *
-from src.ui.annotation_plot import AnnotationPlot, FFTPlot
-from src.controllers import AnnotationController
+from pyhfo2app.utils.utils_plotting import *
+from pyhfo2app.ui.annotation_plot import AnnotationPlot, FFTPlot
+from pyhfo2app.controllers import AnnotationController
 import warnings
 
 ROOT_DIR = Path(__file__).parent
@@ -22,7 +22,7 @@ class Annotation(QtWidgets.QMainWindow):
         self.backend = backend
         self.ui = uic.loadUi(os.path.join(ROOT_DIR, 'annotation.ui'), self)
         self.setWindowTitle(f"{self.biomarker_type} Annotator")
-        self.setWindowIcon(QtGui.QIcon(os.path.join(ROOT_DIR, 'src/ui/images/icon.png')))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(ROOT_DIR, 'pyhfo2app/ui/images/icon.png')))
         self.threadpool = QThreadPool()
         self.close_signal = close_signal
         safe_connect_signal_slot(self.close_signal, self.close)

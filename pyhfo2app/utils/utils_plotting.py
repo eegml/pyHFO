@@ -23,8 +23,8 @@ from PyQt5.QtWidgets import QDialog, QApplication, QGridLayout
 import matplotlib
 import pyqtgraph as pg
 import sys
-# from src.hfo_app import HFO_App
-from src.utils.utils_feature import *
+# from pyhfo2app.hfo_app import HFO_App
+from pyhfo2app.utils.utils_feature import *
 from scipy.signal import butter, sosfiltfilt
 
 from PyQt5.QtWidgets import QDialog, QApplication, QGridLayout

@@ -1,7 +1,7 @@
 import os
 import re
 import sys
-from src.ui.main_window import MainWindow
+from pyhfo2app.ui.main_window import MainWindow
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 import multiprocessing as mp

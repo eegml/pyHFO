@@ -7,10 +7,10 @@ import mne
 # from superqt import QDoubleRangeSlider
 from tqdm import tqdm
 import os
-from src.hfo_app import HFO_App
-from src.spindle_app import SpindleApp
+from pyhfo2app.hfo_app import HFO_App
+from pyhfo2app.spindle_app import SpindleApp
 import random
-from src.controllers import MiniPlotController, MainWaveformPlotController
+from pyhfo2app.controllers import MiniPlotController, MainWaveformPlotController
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.dirname(curr_dir))

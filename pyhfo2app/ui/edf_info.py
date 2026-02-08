@@ -11,7 +11,7 @@ ROOT_DIR = Path(__file__).parent
 class EDFInformation(QtWidgets.QDialog):
     def __init__(self):
         super(EDFInformation, self).__init__()
-        self.ui = uic.loadUi(os.path.join(ROOT_DIR, 'src/ui/edf_info.ui'), self)
+        self.ui = uic.loadUi(os.path.join(ROOT_DIR, 'pyhfo2app/ui/edf_info.ui'), self)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'src/ui/annotation.ui'
+# Form implementation generated from reading ui file 'pyhfo2app/ui/annotation.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #

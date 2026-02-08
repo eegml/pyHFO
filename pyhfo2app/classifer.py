@@ -1,13 +1,13 @@
 import numpy as np
-from src.utils.utils_inference import *
-from src.param.param_classifier import ParamClassifier
+from pyhfo2app.utils.utils_inference import *
+from pyhfo2app.param.param_classifier import ParamClassifier
 import torch
-from src.model import PreProcessing, NeuralCNN_ehfo
-import src.model
+from pyhfo2app.model import PreProcessing, NeuralCNN_ehfo
+import pyhfo2app.model
 from transformers import TrainingArguments, ViTForImageClassification
 from transformers import Trainer
-from src.dl_models import *
-from src.hfo_feature import HFO_Feature
+from pyhfo2app.dl_models import *
+from pyhfo2app.hfo_feature import HFO_Feature
 import os
 
 
@@ -56,7 +56,7 @@ class Classifier():
         self.model_type = param.model_type
         self.ehfo_path = param.ehfo_path
         import sys
-        sys.modules['src.model_pyhfo_process'] = src.model
+        sys.modules['pyhfo2app.model_pyhfo_process'] = pyhfo2app.model
         model_load = torch.load(self.ehfo_path, map_location=torch.device('cpu'), weights_only=False)
         self.model_e = model_load["model"]
 
@@ -200,7 +200,7 @@ if __name__ == '__main__':
     device = "cpu"
     ehfo_path = '/Users/duanchenda/Desktop/gitplay/pyHFO/ckpt/model_e.tar'
     import sys
-    sys.modules['src.model_pyhfo_process'] = src.model
+    sys.modules['pyhfo2app.model_pyhfo_process'] = pyhfo2app.model
     ckpt = torch.load(ehfo_path, map_location=device, weights_only=False)
 
     model_e = ckpt["model"].to(device).float()

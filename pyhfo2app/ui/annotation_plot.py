@@ -5,9 +5,9 @@ import math
 import numpy as np
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 
-from src.utils.utils_annotation import calculate_default_boundary
-from src.utils.utils_gui import COLOR_MAP
-from src.utils.utils_plotting import calculate_time_frequency
+from pyhfo2app.utils.utils_annotation import calculate_default_boundary
+from pyhfo2app.utils.utils_gui import COLOR_MAP
+from pyhfo2app.utils.utils_plotting import calculate_time_frequency
 from scipy.signal import periodogram
 
 

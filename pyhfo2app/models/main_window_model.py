@@ -11,17 +11,17 @@ from PyQt5.QtCore import pyqtSignal
 import ast
 import multiprocessing as mp
 import torch
-from src.hfo_app import HFO_App
-from src.spindle_app import SpindleApp
-from src.ui.quick_detection import HFOQuickDetector
-from src.ui.channels_selection import ChannelSelectionWindow
-from src.param.param_classifier import ParamClassifier
-from src.param.param_detector import ParamDetector, ParamSTE, ParamMNI, ParamHIL, ParamYASA
-from src.param.param_filter import ParamFilter, ParamFilterSpindle
-from src.ui.bipolar_channel_selection import BipolarChannelSelectionWindow
-from src.ui.annotation import Annotation
-from src.utils.utils_gui import *
-from src.ui.plot_waveform import *
+from pyhfo2app.hfo_app import HFO_App
+from pyhfo2app.spindle_app import SpindleApp
+from pyhfo2app.ui.quick_detection import HFOQuickDetector
+from pyhfo2app.ui.channels_selection import ChannelSelectionWindow
+from pyhfo2app.param.param_classifier import ParamClassifier
+from pyhfo2app.param.param_detector import ParamDetector, ParamSTE, ParamMNI, ParamHIL, ParamYASA
+from pyhfo2app.param.param_filter import ParamFilter, ParamFilterSpindle
+from pyhfo2app.ui.bipolar_channel_selection import BipolarChannelSelectionWindow
+from pyhfo2app.ui.annotation import Annotation
+from pyhfo2app.utils.utils_gui import *
+from pyhfo2app.ui.plot_waveform import *
 
 
 class MainWindowModel(QObject):
@@ -483,10 +483,10 @@ class MainWindowModel(QObject):
         
         # Create a new backend instance
         if self.biomarker_type == 'HFO':
-            from src.hfo_app import HFO_App
+            from pyhfo2app.hfo_app import HFO_App
             self.backend = HFO_App()
         else:  # Spindle
-            from src.spindle_app import SpindleApp
+            from pyhfo2app.spindle_app import SpindleApp
             self.backend = SpindleApp()
         
         # Load basic data
@@ -515,7 +515,7 @@ class MainWindowModel(QObject):
 
         # Handle filtering - load pre-computed data if available
         if self.backend.filtered:
-            from src.param.param_filter import ParamFilter
+            from pyhfo2app.param.param_filter import ParamFilter
             self.backend.param_filter = ParamFilter.from_dict(checkpoint["param_filter"].item())
             
             # Load pre-computed filtered data instead of recomputing
@@ -536,14 +536,14 @@ class MainWindowModel(QObject):
                 
         # Handle classification
         if self.backend.classified:
-            from src.param.param_classifier import ParamClassifier
+            from pyhfo2app.param.param_classifier import ParamClassifier
             self.backend.param_classifier = ParamClassifier.from_dict(checkpoint["param_classifier"].item())
 
         # Handle detection and event features
         if self.backend.detected:
             if self.biomarker_type == 'HFO':
-                from src.hfo_feature import HFO_Feature
-                from src.param.param_detector import ParamDetector
+                from pyhfo2app.hfo_feature import HFO_Feature
+                from pyhfo2app.param.param_detector import ParamDetector
                 
                 self.backend.HFOs = checkpoint["HFOs"]
                 self.backend.param_detector = ParamDetector.from_dict(checkpoint["param_detector"].item())
@@ -563,8 +563,8 @@ class MainWindowModel(QObject):
                     has_actual_predictions = np.any((artifact_predictions != 0) & (artifact_predictions != -1))
                     self.backend.event_features.artifact_predicted = has_actual_predictions and self.backend.classified
             else:  # Spindle
-                from src.spindle_feature import SpindleFeature
-                from src.param.param_detector import ParamDetector
+                from pyhfo2app.spindle_feature import SpindleFeature
+                from pyhfo2app.param.param_detector import ParamDetector
                 
                 self.backend.Spindles = checkpoint["Spindles"]
                 self.backend.param_detector = ParamDetector.from_dict(checkpoint["param_detector"].item())
@@ -759,7 +759,7 @@ class MainWindowModel(QObject):
         if self.biomarker_type == 'HFO':
             # First set default filter parameters (required by set_detector)
             try:
-                from src.param.param_filter import ParamFilter
+                from pyhfo2app.param.param_filter import ParamFilter
                 default_filter = ParamFilter()
                 self.backend.set_filter_parameter(default_filter)
                 
@@ -789,7 +789,7 @@ class MainWindowModel(QObject):
         elif self.biomarker_type == 'Spindle':
             # First set default filter parameters
             try:
-                from src.param.param_filter import ParamFilterSpindle
+                from pyhfo2app.param.param_filter import ParamFilterSpindle
                 default_filter = ParamFilterSpindle()
                 self.backend.set_filter_parameter(default_filter)
                 
@@ -1012,7 +1012,7 @@ class MainWindowModel(QObject):
                 })
             
             # Save using the same method as the backend
-            from src.utils.utils_io import dump_to_npz
+            from pyhfo2app.utils.utils_io import dump_to_npz
             dump_to_npz(checkpoint, npz_path)
             
             # Notify the user

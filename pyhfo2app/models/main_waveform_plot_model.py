@@ -1,7 +1,7 @@
 import numpy as np
-from src.hfo_app import HFO_App
-from src.utils.utils_gui import *
-from src.spindle_app import SpindleApp
+from pyhfo2app.hfo_app import HFO_App
+from pyhfo2app.utils.utils_gui import *
+from pyhfo2app.spindle_app import SpindleApp
 import sys
 
 
