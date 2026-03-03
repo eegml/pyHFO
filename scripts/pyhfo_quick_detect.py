@@ -56,7 +56,7 @@ def build_parser():
     parser.add_argument(
         "--detector",
         choices=["HIL", "STE", "MNI"],
-        default="HIL",
+        default="STE",
         help="Detection algorithm",
     )
 

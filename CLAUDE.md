@@ -7,27 +7,48 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 PyHFO is a PyQt5 desktop application for deep learning-based High-Frequency Oscillation (HFO) analysis in EEG/iEEG data. It supports multiple detection algorithms (STE, MNI, HIL), AI-powered classification (artifact, spike, eHFO), and interactive annotation. It reads EDF and BrainVision formats.
 
 ## Running the Application
+Note: the current version is limitted to use python 3.9 - 3.11 because PyQt5 is
+not supported beyond version python 3.11.
 
 ```bash
-# Setup (Python 3.9)
+# Setup (Python 3.9; 3.10 or 3.11 are also acceptable)
 conda create -n pyhfo python=3.9
 pip install -e .          # recommended (uses pyproject.toml)
 # OR: pip install -r requirements.txt
 
 # Run
 python main.py
+# OR: pyhfo              # uses the installed entry point
 ```
 
-There are no automated tests, linting, or CI configured.
+### Tool install (pyhfo command)
+
+Python in range of 3.9 - 3.11 is required — other versions produce segfaults due
+to incompatible PyQt5 binary wheels.
+
+```bash
+uv tool install --python 3.9 .          # recommended
+# OR: this might work:  pipx install --python python3.9 .
+pyhfo
+```
+
+### Testing
+
+```bash
+pytest tests/               # run locally
+tox                          # run across Python 3.9–3.11 (requires tox-uv)
+tox -e py39                  # single version
+```
 
 ## Architecture
 
 **MVC pattern** with four parallel component groups (main window, waveform plot, mini plot, annotation), each in `pyhfo2app/models/`, `pyhfo2app/views/`, `pyhfo2app/controllers/`.
 
 **Key data flow:**
-1. `main.py` → `pyhfo2app/ui/main_window.py` (MainWindow) → creates MVC components
-2. `MainWindowController` orchestrates biomarker-specific windows (HFO, Spindle, Spike)
-3. `MainWindowModel` (`pyhfo2app/models/main_window_model.py`, ~77KB) holds most application state and delegates to backends
+1. `main.py` → `pyhfo2app.app.py`
+2  `pyhfo2app.app.py` -> `pyhfo2app/ui/main_window.py` (MainWindow) → creates MVC components
+3. `MainWindowController` orchestrates biomarker-specific windows (HFO, Spindle, Spike)
+4. `MainWindowModel` (`pyhfo2app/models/main_window_model.py`, ~77KB) holds most application state and delegates to backends
 
 **Backend processing (`pyhfo2app/`):**
 - `hfo_app.py` / `spindle_app.py` — Core detection backends. Load EDF, filter, detect, extract features, classify, export NPZ
