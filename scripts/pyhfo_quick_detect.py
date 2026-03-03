@@ -69,17 +69,29 @@ def build_parser():
 
     # --- HIL (ParamHIL(2000) defaults) ---
     hil = parser.add_argument_group("HIL detector parameters")
-    hil.add_argument("--hil-epoch-time", type=float, default=3600, help="Epoch time (s)")
+    hil.add_argument(
+        "--hil-epoch-time", type=float, default=3600, help="Epoch time (s)"
+    )
     hil.add_argument("--hil-sd-threshold", type=float, default=5, help="SD threshold")
-    hil.add_argument("--hil-min-window", type=float, default=0.01, help="Minimum window (s)")
+    hil.add_argument(
+        "--hil-min-window", type=float, default=0.01, help="Minimum window (s)"
+    )
 
     # --- STE (ParamSTE(2000) defaults) ---
     ste = parser.add_argument_group("STE detector parameters")
-    ste.add_argument("--ste-rms-window", type=float, default=3e-3, help="RMS window (s)")
-    ste.add_argument("--ste-min-window", type=float, default=6e-3, help="Minimum window (s)")
+    ste.add_argument(
+        "--ste-rms-window", type=float, default=3e-3, help="RMS window (s)"
+    )
+    ste.add_argument(
+        "--ste-min-window", type=float, default=6e-3, help="Minimum window (s)"
+    )
     ste.add_argument("--ste-min-gap", type=float, default=10e-3, help="Minimum gap (s)")
-    ste.add_argument("--ste-epoch-len", type=float, default=600, help="Epoch length (s)")
-    ste.add_argument("--ste-min-osc", type=float, default=6, help="Minimum oscillations")
+    ste.add_argument(
+        "--ste-epoch-len", type=float, default=600, help="Epoch length (s)"
+    )
+    ste.add_argument(
+        "--ste-min-osc", type=float, default=6, help="Minimum oscillations"
+    )
     ste.add_argument("--ste-rms-thres", type=float, default=5, help="RMS threshold")
     ste.add_argument("--ste-peak-thres", type=float, default=3, help="Peak threshold")
 
@@ -87,21 +99,41 @@ def build_parser():
     mni = parser.add_argument_group("MNI detector parameters")
     mni.add_argument("--mni-epoch-time", type=float, default=10, help="Epoch time (s)")
     mni.add_argument("--mni-epo-chf", type=float, default=60, help="Epoch CHF")
-    mni.add_argument("--mni-per-chf", type=float, default=95, help="CHF percentage (%%)")
-    mni.add_argument("--mni-min-win", type=float, default=10e-3, help="Minimum window (s)")
+    mni.add_argument(
+        "--mni-per-chf", type=float, default=95, help="CHF percentage (%%)"
+    )
+    mni.add_argument(
+        "--mni-min-win", type=float, default=10e-3, help="Minimum window (s)"
+    )
     mni.add_argument("--mni-min-gap", type=float, default=10e-3, help="Minimum gap (s)")
-    mni.add_argument("--mni-thrd-perc", type=float, default=99.9999, help="Threshold percentage (%%)")
-    mni.add_argument("--mni-base-seg", type=float, default=125e-3, help="Baseline segment (s)")
+    mni.add_argument(
+        "--mni-thrd-perc", type=float, default=99.9999, help="Threshold percentage (%%)"
+    )
+    mni.add_argument(
+        "--mni-base-seg", type=float, default=125e-3, help="Baseline segment (s)"
+    )
     mni.add_argument("--mni-base-shift", type=float, default=0.5, help="Baseline shift")
-    mni.add_argument("--mni-base-thrd", type=float, default=0.67, help="Baseline threshold")
-    mni.add_argument("--mni-base-min", type=float, default=5, help="Baseline minimum time (s)")
+    mni.add_argument(
+        "--mni-base-thrd", type=float, default=0.67, help="Baseline threshold"
+    )
+    mni.add_argument(
+        "--mni-base-min", type=float, default=5, help="Baseline minimum time (s)"
+    )
 
     # --- Classifier ---
     cls = parser.add_argument_group("classifier parameters")
-    cls.add_argument("--classify", action="store_true", help="Run AI classifier after detection")
-    cls.add_argument("--device", default=None, help="Classifier device, e.g. 'cpu' or 'cuda:0' (default: auto)")
+    cls.add_argument(
+        "--classify", action="store_true", help="Run AI classifier after detection"
+    )
+    cls.add_argument(
+        "--device",
+        default=None,
+        help="Classifier device, e.g. 'cpu' or 'cuda:0' (default: auto)",
+    )
     cls.add_argument("--batch-size", type=int, default=32, help="Classifier batch size")
-    cls.add_argument("--no-spikes", action="store_true", help="Skip spike (spkHFO) classification")
+    cls.add_argument(
+        "--no-spikes", action="store_true", help="Skip spike (spkHFO) classification"
+    )
     cls.add_argument(
         "--ignore-seconds-before",
         type=float,
@@ -119,7 +151,11 @@ def build_parser():
     out = parser.add_argument_group("output")
     out.add_argument("--xlsx", action="store_true", help="Save results as .xlsx")
     out.add_argument("--npz", action="store_true", help="Save results as .npz")
-    out.add_argument("--output-dir", default=None, help="Output directory (default: same as input file)")
+    out.add_argument(
+        "--output-dir",
+        default=None,
+        help="Output directory (default: same as input file)",
+    )
 
     # --- Processing ---
     parser.add_argument("--n-jobs", type=int, default=4, help="Number of parallel jobs")
@@ -230,42 +266,45 @@ def main(argv=None):
 
     # 5. Classify (mirrors quick_detection.py _classify behaviour)
     if args.classify:
-        import torch
-
-        if args.device is None:
-            device = "cuda:0" if torch.cuda.is_available() else "cpu"
+        if n_events == 0:
+            print("Skipping classification — no events to classify.")
         else:
-            device = args.device
+            import torch
 
-        print(f"Setting up classifier (device={device}) ...")
+            if args.device is None:
+                device = "cuda:0" if torch.cuda.is_available() else "cpu"
+            else:
+                device = args.device
 
-        # set_default_*_classifier creates ParamClassifier + Classifier instance
-        if "cuda" in device and torch.cuda.is_available():
-            backend.set_default_gpu_classifier()
-        else:
-            backend.set_default_cpu_classifier()
+            print(f"Setting up classifier (device={device}) ...")
 
-        if args.batch_size != 32:
-            backend.param_classifier.batch_size = args.batch_size
-            backend.classifier.batch_size = args.batch_size
+            # set_default_*_classifier creates ParamClassifier + Classifier instance
+            if "cuda" in device and torch.cuda.is_available():
+                backend.set_default_gpu_classifier()
+            else:
+                backend.set_default_cpu_classifier()
 
-        # Load model weights (HuggingFace cards set by the default above)
-        backend.set_classifier(backend.param_classifier)
+            if args.batch_size != 32:
+                backend.param_classifier.batch_size = args.batch_size
+                backend.classifier.batch_size = args.batch_size
 
-        print(
-            f"  Classifying artifacts "
-            f"(ignore {args.ignore_seconds_before}s before, "
-            f"{args.ignore_seconds_after}s after) ..."
-        )
-        backend.classify_artifacts(
-            [args.ignore_seconds_before, args.ignore_seconds_after]
-        )
+            # Load model weights (HuggingFace cards set by the default above)
+            backend.set_classifier(backend.param_classifier)
 
-        if not args.no_spikes:
-            print("  Classifying spikes ...")
-            backend.classify_spikes()
+            print(
+                f"  Classifying artifacts "
+                f"(ignore {args.ignore_seconds_before}s before, "
+                f"{args.ignore_seconds_after}s after) ..."
+            )
+            backend.classify_artifacts(
+                [args.ignore_seconds_before, args.ignore_seconds_after]
+            )
 
-        print("  Classification complete.")
+            if not args.no_spikes:
+                print("  Classifying spikes ...")
+                backend.classify_spikes()
+
+            print("  Classification complete.")
 
     # 6. Export
     if args.xlsx:
